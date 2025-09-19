@@ -49,3 +49,30 @@ if (siteNav) {
 if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
 }
+
+const cookieBanner = document.getElementById('cookie-banner');
+const cookieAccept = document.getElementById('cookie-accept');
+const cookieConsentKey = 'jk_cookie_consent';
+
+if (cookieBanner && cookieAccept) {
+  let hasConsent = null;
+
+  try {
+    hasConsent = window.localStorage.getItem(cookieConsentKey);
+  } catch (err) {
+    hasConsent = null;
+  }
+
+  if (!hasConsent) {
+    cookieBanner.classList.add('is-visible');
+  }
+
+  cookieAccept.addEventListener('click', () => {
+    try {
+      window.localStorage.setItem(cookieConsentKey, 'accepted');
+    } catch (err) {
+      // Ignore storage errors and simply hide the banner.
+    }
+    cookieBanner.classList.remove('is-visible');
+  });
+}
