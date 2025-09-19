@@ -129,6 +129,9 @@ p {
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow: 0 8px 24px rgba(17, 24, 31, 0.08);
+  background-color: rgba(247, 244, 240, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .site-header .container {
@@ -178,6 +181,8 @@ p {
   gap: 1.25rem;
   font-weight: 500;
   color: var(--color-secondary);
+
+  color: var(--color-muted);
 }
 
 .site-nav a:hover {
@@ -228,6 +233,7 @@ p {
   color: #f5f8fb;
 }
 
+ 
 .hero::after {
   content: "";
   position: absolute;
