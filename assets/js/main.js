@@ -3,9 +3,13 @@ const siteNav = document.getElementById('site-nav');
 const yearEl = document.getElementById('year');
 
 if (navToggle && siteNav) {
+  navToggle.setAttribute('aria-expanded', 'false');
+  navToggle.setAttribute('aria-controls', 'site-nav');
+
   navToggle.addEventListener('click', () => {
     siteNav.classList.toggle('open');
     navToggle.classList.toggle('active');
+    navToggle.setAttribute('aria-expanded', String(siteNav.classList.contains('open')));
   });
 }
 
@@ -37,6 +41,7 @@ if (siteNav) {
       siteNav.classList.remove('open');
       if (navToggle) {
         navToggle.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
         navToggle.querySelectorAll('span').forEach((span) => {
           span.style.transform = 'none';
           span.style.opacity = '1';
@@ -48,31 +53,4 @@ if (siteNav) {
 
 if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
-}
-
-const cookieBanner = document.getElementById('cookie-banner');
-const cookieAccept = document.getElementById('cookie-accept');
-const cookieConsentKey = 'jk_cookie_consent';
-
-if (cookieBanner && cookieAccept) {
-  let hasConsent = null;
-
-  try {
-    hasConsent = window.localStorage.getItem(cookieConsentKey);
-  } catch (err) {
-    hasConsent = null;
-  }
-
-  if (!hasConsent) {
-    cookieBanner.classList.add('is-visible');
-  }
-
-  cookieAccept.addEventListener('click', () => {
-    try {
-      window.localStorage.setItem(cookieConsentKey, 'accepted');
-    } catch (err) {
-      // Ignore storage errors and simply hide the banner.
-    }
-    cookieBanner.classList.remove('is-visible');
-  });
 }
